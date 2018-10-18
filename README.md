@@ -1,5 +1,7 @@
 # HopIn
 
+Pre requisite: Android Studio
+
 Steps for installation:
 
 1. git clone https://github.com/HopInIndia/HopIn.git
