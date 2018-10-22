@@ -30,10 +30,10 @@ export default class App extends Component<Props> {
 			error: null,
 			response: null,
 			initialRegion: {
-				latitude: 28.459497,
-				longitude: 77.026634,
-				latitudeDelta: 0.015,
-				longitudeDelta: 0.0121,
+				latitude: null,
+				longitude: null,
+				latitudeDelta: null,
+				longitudeDelta: null,
 			}
 		}
 	}
@@ -51,8 +51,8 @@ export default class App extends Component<Props> {
 						initialRegion: {
 							latitude: location.coords.latitude,
 							longitude: location.coords.longitude,
-							latitudeDelta: 0.01,
-							longitudeDelta: 0.01,
+							latitudeDelta: 0.005,
+							longitudeDelta: 0.005,
 						}
 					})
 				}, error => {
@@ -81,19 +81,21 @@ export default class App extends Component<Props> {
 		)
 		return (
 			<View style={styles.container}>
-				<MapView
-					style={styles.map}
-					region={this.state.initialRegion} 
-					>
-					<Marker
+			{
+				(this.state.initialRegion.latitude && this.state.initialRegion.longitude) && 
+				(
+					<MapView
 						style={styles.map}
-						coordinate={{
-							latitude: 36.329825,
-							longitude: 79.4324
-						}}
-						title = {'My marker'}
-						description = {'My marker desc'} />
-				</MapView>
+						region={this.state.initialRegion} 
+						>
+						<Marker
+							style={styles.map}
+							coordinate={this.state.initialRegion}
+							title = {'My marker'}
+							description = {'My marker desc'} />
+					</MapView>
+				)
+			}
 			</View>
 		)
 	}
@@ -101,18 +103,18 @@ export default class App extends Component<Props> {
 
 const styles = StyleSheet.create({
 	container: {
-		justifyContent: 'flex-end',
-		alignItems: 'center',
-		position: 'absolute',
+		position: 'relative',
 		top:0,
-		left:0
+		left:0,
+		width: '100%',
+		height: '100%'
 	},
 	map: {
 		position: 'absolute',
 		top:0,
 		left:0,
 		flex:1,
-		width:700,
-		height:700
+		width:'100%',
+		height:'100%'
 	},
 })
