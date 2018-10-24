@@ -11,6 +11,8 @@ import { Platform, StyleSheet, Text, View, DrawerLayoutAndroid } from 'react-nat
 import { Container, Header, Left, Body, Right, Button, Icon, Title } from 'native-base'
 import SplashScreen from 'react-native-splash-screen'
 import SelectLocation from './Views/SelectLocation'
+import Main from './Views/Main'
+import { createStackNavigator} from 'react-navigation';
 
 const instructions = Platform.select({
 	ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -19,22 +21,37 @@ const instructions = Platform.select({
 	'Shake or press menu button for dev menu',
 })
 
-type Props = {}
+const StackNav = createStackNavigator({
+		Main: {
+			screen: Main,
+			navigationOptions: () => ({
+				title: 'Hopin',
+				headerStyle: {
+					backgroundColor: '#DEC11F'
+				}
+			})
+		},
+		SelectLocation: {
+			screen: SelectLocation,
+			navigationOptions: () => ({
+				title: 'Choose Route'
+			})
+		}
+	},
+	{
+		initialRouteName: 'Main',
+	}
+)
 
-export default class App extends Component<Props> {
-
+export default class App extends Component {
+	constructor(props){
+		super(props);
+	}
 	componentDidMount() {
 		SplashScreen.hide()
 	}
 
 	render() {
-		var navigationView = (
-			<View style={{flex: 1, backgroundColor: '#fff'}}>
-				<Text style={{margin: 10, fontSize: 15, textAlign: 'left'}}>I'm in the Drawer!</Text>
-			</View>
-		)
-		return (
-			<SelectLocation/>
-		)
+		return <StackNav />
 	}
 }
