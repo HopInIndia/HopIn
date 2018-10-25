@@ -28,6 +28,11 @@ const styles = StyleSheet.create({
 	rideText: {
 		color: '#000',
 		fontSize: 18
+	},
+	profileImage: {
+		backgroundColor: '#DEC11F',
+		width: 40,
+		height: 40
 	}
 
 })

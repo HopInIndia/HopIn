@@ -11,7 +11,7 @@ export default class Main extends React.Component {
     }
 
     render(){
-        const uri = './profile_pic.png';
+        const uri = '/Assets/Images/profile_pic.png';
         return(
             <View style	={styles.container}>
                 <View style={styles.row}>
@@ -25,6 +25,7 @@ export default class Main extends React.Component {
                 <Card>
                     <CardItem>
                         <Thumbnail square small source={{uri: uri}} />
+                        <View style="styles.profileImage"><Text>S</Text></View>
                         <Text>Shaivi Vashistha</Text>
                         <Text>DPS, Fairdabad</Text>
                         <Text>Gold</Text>

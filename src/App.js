@@ -1,18 +1,11 @@
-/**
-* Sample React Native App
-* https://github.com/facebook/react-native
-*
-* @format
-* @flow
-*/
-
 import React, {Component} from 'react'
 import { Platform, StyleSheet, Text, View, DrawerLayoutAndroid } from 'react-native'
 import { Container, Header, Left, Body, Right, Button, Icon, Title } from 'native-base'
 import SplashScreen from 'react-native-splash-screen'
 import SelectLocation from './Views/SelectLocation'
+import Login from './Views/Login'
 import Main from './Views/Main'
-import { createStackNavigator} from 'react-navigation';
+import { createStackNavigator, createSwitchNavigator} from 'react-navigation';
 
 const instructions = Platform.select({
 	ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -21,25 +14,42 @@ const instructions = Platform.select({
 	'Shake or press menu button for dev menu',
 })
 
-const StackNav = createStackNavigator({
-		Main: {
-			screen: Main,
-			navigationOptions: () => ({
-				title: 'Hopin',
-				headerStyle: {
-					backgroundColor: '#DEC11F'
-				}
-			})
-		},
-		SelectLocation: {
-			screen: SelectLocation,
-			navigationOptions: () => ({
-				title: 'Choose Route'
-			})
-		}
+const LoginStack = createStackNavigator({
+	Login: {
+		screen: Login,
+		navigationOptions: () => ({
+			title: 'Hopin',
+			headerStyle: {
+				backgroundColor: '#DEC11F'
+			}
+		})
+	}
+})
+
+const MainStack = createStackNavigator({
+	Main: {
+		screen: Main,
+		navigationOptions: () => ({
+			title: 'Hopin',
+			headerStyle: {
+				backgroundColor: '#DEC11F'
+			}
+		})
+	},
+	SelectLocation: {
+		screen: SelectLocation,
+		navigationOptions: () => ({
+			title: 'Choose Route'
+		})
+	}
+})
+
+const SwitchNav = createSwitchNavigator({
+		Login: LoginStack,
+		Main: MainStack
 	},
 	{
-		initialRouteName: 'Main',
+		initialRouteName: 'Login',
 	}
 )
 
@@ -52,6 +62,6 @@ export default class App extends Component {
 	}
 
 	render() {
-		return <StackNav />
+		return <SwitchNav />
 	}
 }
