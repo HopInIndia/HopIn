@@ -7,10 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="38af9add-72e1-4a3b-8488-a7872a3f5f17" name="Default" comment="HopIn First Commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Main/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Main/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Main/profile_pic.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Views/Main/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Main/styles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Login/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Login/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Views/Login/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Views/Login/styles.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -54,7 +56,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1382" />
@@ -199,7 +201,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <layout>
       <window_info anchor="bottom" id="Android Profiler" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="TODO" order="6" />

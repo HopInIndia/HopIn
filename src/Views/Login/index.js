@@ -1,42 +1,67 @@
 import React, {Component} from 'react'
-import { View, Text } from 'react-native'
+import { View, Text,TextInput } from 'react-native'
 import { Container, Header, Label,Content, Item,Form,Left, Right, Input, Button, Icon, Title, Card, CardItem,Thumbnail } from 'native-base'
 import styles from './styles'
+import { userInfo } from '../../Redux/User/actions'
+import { connect } from 'react-redux'
 
-export default class Login extends React.Component {
+class Login extends React.Component {
     constructor(props){
     	super(props);
-    	this.state = {
-            username: '',
-            password: ''
-        };
+        this.validateLogin = this.validateLogin.bind(this);
+    }
+
+    validateLogin() {
+        let phone = this.phone._lastNativeText;
+        let password = this.password._lastNativeText;
+        this.props.userInfo({
+            'phone': phone,
+            'password': password
+        });
     }
 
     render(){
         return(
             <Container>
-                <Content style={{padding: 5}}>
+                <Content style={styles.p5}>
                     <Form>
-                        <View style={{paddingRight: 10}}>
-                            <Item style={{marginTop: 10}}>
+                        <View style={styles.pR10}>
+                            <Item style={styles.mT10}>
                                 <Icon active name='home' />
-                                <Input placeholder='Phone Number'/>
+                                <TextInput placeholder='Phone Number' ref={input => (this.phone = input)}/>
                             </Item>
-                            <Item style={{marginTop: 10}}>
+                            <Item style={styles.mT10}>
                                 <Icon active name='home' />
-                                <Input placeholder='Password'/>
+                                <TextInput placeholder='Password' ref={input => (this.password = input)}/>
                             </Item>
                         </View>
-                        <Text style={{padding: 10, marginTop: 10, width: '100%', textAlign: 'right'}}>Forgot Password?</Text>
-                        <Button style={{margin: 10, borderColor: '#DEC11F'}} rounded bordered block onPress={() => this.props.navigation.navigate('Main') }>
-                            <Text style={{fontSize: 20}}>LOGIN</Text>
+                        {
+                            !this.props.UserReducer.isLoggedIn && <Text style={styles.fail_message}>{this.props.UserReducer.message}</Text>
+                        }
+                        <Text style={styles.forgotPasswordLink}>Forgot Password?</Text>
+                        <Button style={styles.loginButton} rounded bordered block onPress={this.validateLogin}>
+                            <Text style={styles.loginText}>LOGIN</Text>
                         </Button>
-                        <Text style={{marginTop: 20, textAlign: 'center', width: '100%', }}>
-                            Don't have an account? <Text style={{fontWeight: 'bold'}}>Sign Up Here!</Text>
+                        <Text style={styles.noAccount}>
+                            Don't have an account? <Text style={styles.boldText}>Sign Up Here!</Text>
                         </Text>
+                        {
+                            this.props.UserReducer.isLoggedIn && <Text style={styles.success_message}>Login Successful!</Text>
+                        }
                     </Form>
                 </Content>
             </Container>
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    console.log("UserReducer state");
+    console.log(state);
+    return {
+        UserReducer: state.UserReducer
+    }
+}
+const mapDispatchToProps = { userInfo };
+
+ export default connect(mapStateToProps,mapDispatchToProps)(Login)

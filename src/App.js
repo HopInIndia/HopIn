@@ -6,6 +6,8 @@ import SelectLocation from './Views/SelectLocation'
 import Login from './Views/Login'
 import Main from './Views/Main'
 import { createStackNavigator, createSwitchNavigator} from 'react-navigation';
+import store from './store.js'
+import {Provider} from 'react-redux'
 
 const instructions = Platform.select({
 	ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -62,6 +64,6 @@ export default class App extends Component {
 	}
 
 	render() {
-		return <SwitchNav />
+		return (<Provider store={store}><SwitchNav /></Provider>)
 	}
 }
