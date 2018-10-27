@@ -36,7 +36,7 @@ class Login extends React.Component {
                             </Item>
                         </View>
                         {
-                            !this.props.UserReducer.isLoggedIn && <Text style={styles.fail_message}>{this.props.UserReducer.message}</Text>
+                            !this.props.user.isLoggedIn && <Text style={styles.fail_message}>{this.props.user.error}</Text>
                         }
                         <Text style={styles.forgotPasswordLink}>Forgot Password?</Text>
                         <Button style={styles.loginButton} rounded bordered block onPress={this.validateLogin}>
@@ -46,7 +46,7 @@ class Login extends React.Component {
                             Don't have an account? <Text style={styles.boldText}>Sign Up Here!</Text>
                         </Text>
                         {
-                            this.props.UserReducer.isLoggedIn && <Text style={styles.success_message}>Login Successful!</Text>
+                            this.props.user.isLoggedIn && <Text style={styles.success_message}>Login Successful!</Text>
                         }
                     </Form>
                 </Content>
@@ -56,12 +56,11 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log("UserReducer state");
-    console.log(state);
+	console.log(state)
     return {
-        UserReducer: state.UserReducer
+    	...state.UserReducer
     }
 }
 const mapDispatchToProps = { userInfo };
 
- export default connect(mapStateToProps,mapDispatchToProps)(Login)
+export default connect(mapStateToProps,mapDispatchToProps)(Login)

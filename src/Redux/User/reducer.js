@@ -1,12 +1,31 @@
-var initialState = {}
+var initialState = {
+	user: {
+		isLoggedIn: false,
+		error: null
+	}
+}
 
 export default function UserReducer(state = initialState, action = {}) {
   switch (action.type) {
       case 'LOGIN_SUCCESS':
-        return action
+        return {
+        	...state,
+        	user: {
+        		...action.payload,
+        		error: null,
+        		isLoggedIn: true,     		
+        	}
+        }
       break;
       case 'LOGIN_FAILED':
-        return action
+        return {
+        	...state,
+        	user: {
+        		...action.payload,
+        		isLoggedIn: false,
+        	}
+        }
+       break;
   }
   return state
 }

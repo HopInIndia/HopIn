@@ -1,15 +1,3 @@
-export const loginSuccess = infoObj => ({
-  'type': 'LOGIN_SUCCESS',
-  'isLoggedIn': true,
-  infoObj
-});
-
-export const loginFailed = message => ({
-    'type': 'LOGIN_FAILED',
-    'isLoggedIn': false,
-    message
-});
-
 export const userInfo = info => async dispatch => {
   try {
     const response = await fetch('http://10.0.2.2:9000/oauth/', {
@@ -25,16 +13,34 @@ export const userInfo = info => async dispatch => {
     });
 
     if(response.status == 401) {
-        dispatch(loginFailed("Invalid Credentials"))
+        dispatch({
+        	type: 'LOGIN_FAILED',
+        	payload: {
+        		error: 'Invalid Credentials'
+        	}
+        })
     } else {
         const responseBody = await response.json();
         if(responseBody.user) {
-            dispatch(loginSuccess(responseBody.user));
+            dispatch({
+            	type: 'LOGIN_SUCCESS',
+            	payload: responseBody.user
+            })
         } else if(responseBody.message) {
-            dispatch(loginFailed(responseBody.message))
+            dispatch({
+            	type: 'LOGIN_SUCCESS',
+            	payload: {
+            		error: responseBody.message ? responseBody.message : null
+            	}
+            })
         }
     }
   } catch (error) {
-    console.error(error);
+    dispatch({
+    	type: 'LOGIN_SUCCESS',
+    	payload: {
+    		error: 'Oops! Something went wrong.'
+    	}
+    })
   }
 }
