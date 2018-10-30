@@ -3,9 +3,10 @@ import { Platform, StyleSheet, Text, View, DrawerLayoutAndroid } from 'react-nat
 import { Container, Header, Left, Body, Right, Button, Icon, Title } from 'native-base'
 import SplashScreen from 'react-native-splash-screen'
 
-import store from './store.js'
+import store, {persistor} from './store.js'
 import {Provider} from 'react-redux'
 import Navigation from './Navigation'
+import { PersistGate } from 'redux-persist/lib/integration/react';
 
 const instructions = Platform.select({
 	ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -21,6 +22,10 @@ export default class App extends Component {
 		SplashScreen.hide()
 	}
 	render() {
-		return (<Provider store={store}><Navigation /></Provider>)
+		return (<Provider store={store}>
+					<PersistGate loading={<Text>Loading..</Text>} persistor={persistor}>
+						<Navigation />
+					</PersistGate>
+				</Provider>)
 	}
 }

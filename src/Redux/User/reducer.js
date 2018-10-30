@@ -1,3 +1,6 @@
+import storage from 'redux-persist/lib/storage';
+import {persistReducer} from 'redux-persist';
+
 var initialState = {
 	user: {
 		isLoggedIn: false,
@@ -5,7 +8,7 @@ var initialState = {
 	}
 }
 
-export default function UserReducer(state = initialState, action = {}) {
+function UserReducer(state = initialState, action = {}) {
   switch (action.type) {
       case 'LOGIN_SUCCESS':
         return {
@@ -13,7 +16,7 @@ export default function UserReducer(state = initialState, action = {}) {
         	user: {
         		...action.payload,
         		error: null,
-        		isLoggedIn: true,     		
+        		isLoggedIn: true,
         	}
         }
       break;
@@ -29,3 +32,9 @@ export default function UserReducer(state = initialState, action = {}) {
   }
   return state
 }
+
+const persistConfig = {
+    key: 'user',
+    storage: storage
+}
+export default persistReducer(persistConfig, UserReducer);
